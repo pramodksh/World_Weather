@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:world_time/pages/chooseLocation.dart';
+import 'package:world_time/services/worldWeather.dart';
+
+
+/*
+loading - pen
+home - pen pencil
+*/
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,36 +16,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map data = {};
+  WeatherModel model;
   String image;
 
   @override
   Widget build(BuildContext context) {
     print('Home page:');
-    data = data.isNotEmpty ? data : ModalRoute.of(context)
+
+    var object = ModalRoute.of(context)
         .settings
-        .arguments; // Used to take data from loading page.
-    print(data);
-    String tempStr =data['temp'].toString();
-    String timeZone = data['timeZone'];
-    String description = data['description'];
-    int cloud = data['cloud'];
-    String countryCode = data['countryCode'];
+        .arguments as Map;
+    model = model == null ? object['object'] : model;
+
+    // var data = model != null ? model : ModalRoute.of(context)
+    //     .settings
+    //     .arguments as Map; // Used to take data from loading page.
+    // print(data);
+
+
+
+
+    // String tempStr =data['temp'].toString() ?? 0;
+    // String timeZone = data['timeZone'] ?? "";
+    // String description = data['description'] ?? "";
+    // int cloud = data['cloud'] ?? 0;
+    // String countryCode = data['countryCode'] ?? "";
+    // // print(data['temp'].runtimeType);
+    // // data['temp']=25;
     // print(data['temp'].runtimeType);
-    // data['temp']=25;
-    // print(data['temp']);
-    if(data['temp']>=30){
+    //
+    // if(data['temp']>=30){
        image ='summer';
-       print('summer');
-    }else if(data['temp']<20){
-       image = 'winter';
-       print('winter');
-
-    }else{
-       image = 'spring';
-       print('spring');
-
-    }
+    //    print('summer');
+    // } else if(data['temp']<20){
+    //    image = 'winter';
+    //    print('winter');
+    //
+    // } else{
+    //    image = 'spring';
+    //    print('spring');
+    //
+    // }
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -50,6 +70,16 @@ class _HomePageState extends State<HomePage> {
           child: Center(
             child: Column(
               children: [
+                // // todo remove
+                // RaisedButton(
+                //   onPressed: () async{
+                //     WeatherModel result = await WorldWeather().getAPiData();
+                //     print("RESULT: ${result} | TYPE: ${result.runtimeType}");
+                //     print("RESULT: ${result.temp} ");
+                //   },
+                //   child: Text("DEMO"),
+                // ),
+                // // todo remove
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                   child: TextButton.icon(
@@ -59,16 +89,16 @@ class _HomePageState extends State<HomePage> {
                       print(result);
                       print(result['location'].runtimeType);
                       setState(() {
-                        data = {
+                        // data = {
 
-                          'location' : result['location'],
-                          'coordination' : result['coordination'],
-                          'temp' : result['temp'],
-                          'timeZone' : result['timeZone'],
-                          'description' : result[description],
-                          'cloud' : result['cloud'],
-                          'countryCode' : result['countryCode'],
-                        };
+                          // 'location' : result['location'],
+                          // 'coordination' : result['coordination'],
+                          // 'temp' : result['temp'],
+                          // 'timeZone' : result['timeZone'],
+                          // 'description' : result['description'],
+                          // 'cloud' : result['cloud'],
+                          // 'countryCode' : result['countryCode'],
+                        // };
                       });
                     },
                     label: Text(
@@ -90,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      data['location'],
+                      model.location,
                       style: TextStyle(
                         letterSpacing: 2,
                         fontSize: 42,
@@ -103,34 +133,34 @@ class _HomePageState extends State<HomePage> {
                   width: 20,
                 ),
                 Text(
-                  '$tempStr°',
+                  'temp°',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 92,
                   ),
                 ),
                 Text(
-                  "Time-zone  :  $timeZone",
+                  "Time-zone  :  ",
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 20,
                   ),
                 ), Text(
-                  'Country Code : $countryCode',
+                  'Country Code : ',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 20,
                   ),
                 ),
                 Text(
-                  '$description',
+                  'desc',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,
                   ),
                 ),
                 Text(
-                  'Cloud(s) : $cloud',
+                  'Cloud(s) : ',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,

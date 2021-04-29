@@ -8,7 +8,7 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   String location;
-  String cordination;
+  String coordination;
   double temp;
   String timeZone;
   String description;
@@ -18,22 +18,16 @@ class _LoadingState extends State<Loading> {
   void setWeatherLocation() async {
     print('This is Runnning');
 
-    WorldWeather instance = WorldWeather(location: 'Dharwad', coordination: 'lat=15.4589&lon=75.0078');
-    await instance.getData();
+    WorldWeather instance = WorldWeather(latitude: '15.4589', longitude: '75.0078');
+    WeatherModel object = await instance.getData();
 
     //used to send arguments to homePage
-    Navigator.pushReplacementNamed(context, '/homePage',arguments: {
-    'location' : instance.location,
-    'cordination' : instance.coordination,
-    'temp' : instance.temp,
-    'timeZone' : instance.timeZone,
-    'description' : instance.description,
-    'cloud' : instance.cloud,
-    'countryCode' : instance.countryCode,
+    Navigator.pushReplacementNamed(context, '/homePage', arguments: {
+      'object': object,
     });
     // setState(() {
     //   location = instance.location;
-    //   cordination = instance.coordination;
+    //   coordination = instance.coordination;
     //   temp = instance.temp;
     //   timeZone = instance.timeZone;
     //   description = instance.description;
