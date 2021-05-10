@@ -13,20 +13,23 @@ class _ChooseLocationState extends State<ChooseLocation> {
   // inst.coordination = ;
 
   List<WorldWeather> locations =[
-    WorldWeather(longitude:'15.4589',latitude:'75.0078'),
-    WorldWeather(longitude:'15.8497',latitude:'75.1240'),
-    WorldWeather(longitude:'12.2958',latitude:'76.6394'),
-    WorldWeather(longitude:'16.1691',latitude:'75.6615'),
-    WorldWeather(longitude:'16.1592',latitude:'74.8156'),
-    WorldWeather(longitude:'15.1394',latitude:'76.9214'),
+    WorldWeather(latitude:'15.4589',longitude:'75.0078'),
+    WorldWeather(latitude:'15.8497',longitude:'75.1240'),
+    WorldWeather(latitude:'12.2958',longitude:'76.6394'),
+    WorldWeather(latitude:'16.1691',longitude:'75.6615'),
+    WorldWeather(latitude:'16.1592',longitude:'74.8156'),
+    WorldWeather(latitude:'15.1394',longitude:'76.9214'),
   ];
+
+  List<String> LocationNames = ['Hubli','Saundatti','Mysore','Bagalkot','Gokak','Bellary'];
 
   Future updateLocation(index) async{
     WorldWeather instance = locations[index];
-    // print(locations[index]);
-    await instance.getData();
-    return instance;
-    // await print(instance.location);
+    WeatherModel getDataInstance = await instance.getData();
+    print(instance.getData());
+    print(' This is getData :  $instance');
+    print(' ChooseLocation : This is type of get data ${getDataInstance.runtimeType}');
+    return getDataInstance ;
   }
 
   @override
@@ -45,12 +48,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
           return Card(
             child: ListTile(
               onTap: () async {
-                WorldWeather instance = await updateLocation(index);
+                WeatherModel instance = await updateLocation(index);
+                return instance;
+                // print(instance.longitude);
                 // //navigate to Home Page
                 Navigator.pop(context,{
+                  // 'data':instance,
+                  // 'latitude' : instance.latitude,
+                  // 'longitude' : instance.longitude,
                   // 'location' : instance.location,
                   // 'coordination' : instance.coordination,
-                  // 'temp' : instance.temp,
+                   // 'temp' : instance.temp,
                   // 'timeZone' : instance.timeZone,
                   // 'description' : instance.description,
                   // 'cloud' : instance.cloud,
@@ -58,8 +66,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
                 });
 
               },
-              // title: Text(locations[index].location),
+              title: Text(LocationNames[index]),
             ),
+
           );
         },
       ),

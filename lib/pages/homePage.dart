@@ -26,7 +26,22 @@ class _HomePageState extends State<HomePage> {
     var object = ModalRoute.of(context)
         .settings
         .arguments as Map;
+    // dynamic data1 = object['data'];
+    print('Home Page : ${object}');
+    print('Home Page : ${object.isNotEmpty}');
+
+    // print(data1);
+    if(model==null){
+      print('Model is Null');
+    }
+    else{
+      print('Model is not Null!!!');
+    }
     model = model == null ? object['object'] : model;
+
+    // print(model.location);
+    print("Object returned from chooseLocation :${object['data']}");
+    print("Model returned from chooseLocation :${model}");
 
     // var data = model != null ? model : ModalRoute.of(context)
     //     .settings
@@ -86,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async{
                       dynamic result =
                               await Navigator.pushNamed(context, '/chooseLocation');
-                      print(result);
-                      print(result['location'].runtimeType);
+                      print('This is result  :  {$result}');
+                      print(result.runtimeType);
                       setState(() {
                         // data = {
 
@@ -120,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      model.location,
+                     ' model-location',
                       style: TextStyle(
                         letterSpacing: 2,
                         fontSize: 42,
@@ -133,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                   width: 20,
                 ),
                 Text(
-                  'temp°',
+                  'Temp°',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 92,
@@ -153,14 +168,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Text(
-                  'desc',
+                  "model-description",
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,
                   ),
                 ),
                 Text(
-                  'Cloud(s) : ',
+                  'Cloud(s) :',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,
