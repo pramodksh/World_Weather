@@ -21,27 +21,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Home page:');
+    // print('Home page:');
 
     var object = ModalRoute.of(context)
         .settings
         .arguments as Map;
     // dynamic data1 = object['data'];
-    print('Home Page : ${object}');
-    print('Home Page : ${object.isNotEmpty}');
+    // print('Home Page -> Model Route :${ModalRoute.of(context)
+    //     .settings
+    //     .arguments}');
+    // print('Home Page : ${object}');
+    print('Home Page -> Type of Object  ${object.runtimeType}');
 
-    // print(data1);
+    model = model == null ? object['object'] : model;
+    print('Home Page -> Typeof Model : ${model.runtimeType} ');
     if(model==null){
-      print('Model is Null');
+      print('After Model is Null ');
     }
     else{
-      print('Model is not Null!!!');
+      print('After Model is not Null!!! ${model} ');
     }
-    model = model == null ? object['object'] : model;
 
     // print(model.location);
     print("Object returned from chooseLocation :${object['data']}");
-    print("Model returned from chooseLocation :${model}");
+    print("Model returned from chooseLocation :${model.description}");
 
     // var data = model != null ? model : ModalRoute.of(context)
     //     .settings
@@ -102,10 +105,14 @@ class _HomePageState extends State<HomePage> {
                       dynamic result =
                               await Navigator.pushNamed(context, '/chooseLocation');
                       print('This is result  :  {$result}');
-                      print(result.runtimeType);
-                      setState(() {
-                        // data = {
+                      print('Result :  ${result['object']}');
+                      print(' Result Type : ${result.runtimeType}');
+                      // print('Typeof object of object is :${object['object'].runtimeType}');
 
+
+                      setState(() {
+                          model = result['object'];
+                          // data = {
                           // 'location' : result['location'],
                           // 'coordination' : result['coordination'],
                           // 'temp' : result['temp'],
@@ -135,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                     ' model-location',
+                     model.location,
                       style: TextStyle(
                         letterSpacing: 2,
                         fontSize: 42,
@@ -148,34 +155,34 @@ class _HomePageState extends State<HomePage> {
                   width: 20,
                 ),
                 Text(
-                  'Temp°',
+                  '${model.temp}°',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 92,
                   ),
                 ),
                 Text(
-                  "Time-zone  :  ",
+                  "${model.timeZone}",
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 20,
                   ),
                 ), Text(
-                  'Country Code : ',
+                  '${model.countryCode}',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize: 20,
                   ),
                 ),
                 Text(
-                  "model-description",
+                  '${model.description}',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,
                   ),
                 ),
                 Text(
-                  'Cloud(s) :',
+                  '${model.cloud}',
                   style: TextStyle(
                     letterSpacing: 2,
                     fontSize:20,

@@ -20,6 +20,7 @@ class _LoadingState extends State<Loading> {
     print('1 . LoadingPage');
     WorldWeather instance = WorldWeather(latitude: '15.4589', longitude: '75.0078');
     WeatherModel object = await instance.getData();
+    // print('Loading Page : Type of Object is  : ${object.runtimeType}');
 
     //used to send arguments to homePage
     Navigator.pushReplacementNamed(context, '/homePage', arguments: {

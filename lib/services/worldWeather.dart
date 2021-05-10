@@ -20,9 +20,9 @@ class WorldWeather {
         // print("DATA: $jsonData");
         return WeatherModel(
           timeZone: jsonData['data'][0]['timezone'],
-          temp: jsonData['data'][0]['temp'] ?? 0,
+          temp: jsonData['data'][0]['temp'].toString(),
           description: jsonData['data'][0]['weather']['description'],
-          cloud: jsonData['data'][0]['clouds'],
+          cloud: jsonData['data'][0]['clouds'].toString(),
           countryCode: jsonData['data'][0]['country_code'],
           location: jsonData['data'][0]['city_name'],
         );
@@ -30,17 +30,16 @@ class WorldWeather {
         throw Exception("There was some error");
       }
     } catch (e) {
-      print("This is e: $e");
+      print("World Weather : Error Message : $e");
     }
-    // TODO :Fetch TimeZone,Temperature,Clouds,Country Code
   }
 }
 
 class WeatherModel {
-  double temp;
+  String temp;
   String timeZone;
   String description;
-  int cloud;
+  String cloud;
   String countryCode;
   String location;
 

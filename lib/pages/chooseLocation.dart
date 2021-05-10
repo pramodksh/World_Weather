@@ -49,10 +49,14 @@ class _ChooseLocationState extends State<ChooseLocation> {
             child: ListTile(
               onTap: () async {
                 WeatherModel instance = await updateLocation(index);
-                return instance;
+                print(instance.description);
+
+                // return instance;
+
                 // print(instance.longitude);
                 // //navigate to Home Page
                 Navigator.pop(context,{
+                  'object' : instance ,
                   // 'data':instance,
                   // 'latitude' : instance.latitude,
                   // 'longitude' : instance.longitude,
