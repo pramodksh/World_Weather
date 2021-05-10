@@ -16,28 +16,14 @@ class _LoadingState extends State<Loading> {
   String countryCode;
 
   void setWeatherLocation() async {
-
-    print('1 . LoadingPage');
-    WorldWeather instance = WorldWeather(latitude: '15.4589', longitude: '75.0078');
+    WorldWeather instance =
+        WorldWeather(latitude: '15.4589', longitude: '75.0078');
     WeatherModel object = await instance.getData();
-    // print('Loading Page : Type of Object is  : ${object.runtimeType}');
 
     //used to send arguments to homePage
     Navigator.pushReplacementNamed(context, '/homePage', arguments: {
       'object': object,
     });
-    // setState(() {
-    //   location = instance.location;
-    //   coordination = instance.coordination;
-    //   temp = instance.temp;
-    //   timeZone = instance.timeZone;
-    //   description = instance.description;
-    //   cloud = instance.cloud;
-    //   countryCode = instance.countryCode;
-    // });
-    // setState(() {
-    //   String clouds = instance.cloud.toString();
-    // });
   }
 
   @override
@@ -54,16 +40,7 @@ class _LoadingState extends State<Loading> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Text('This is Loading Page'),
-              // Text('Clouds -$cloud'),
-              // Text('Loocation -$location'),
-              // Text('Coordinaion -$cordination'),
-              // Text('Temperature -$temp'),
-              // Text('Time-zone -$timeZone'),
-              // Text('Description -$description'),
-              // Text('Country Code-$countryCode'),
-            ],
+            children: [],
           ),
         ),
       ),
